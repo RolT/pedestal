@@ -15,9 +15,10 @@
   :url "http://pedestal.io/samples/index"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [io.pedestal/pedestal.service "0.5.1"]
-                 [io.pedestal/pedestal.jetty "0.5.1"]
+  :dependencies [[org.clojure/clojure "1.12.4"]
+                 [io.pedestal/pedestal.service "0.8.1"]
+                 [io.pedestal/pedestal.jetty "0.8.1"]
+                 [org.eclipse.jetty/jetty-alpn-java-server "12.0.29"]
 
                  [ch.qos.logback/logback-classic "1.1.7" :exclusions [org.slf4j/slf4j-api]]
                  [org.slf4j/jul-to-slf4j "1.7.35"]
@@ -25,7 +26,7 @@
                  [org.slf4j/log4j-over-slf4j "1.7.35"]]
   :min-lein-version "2.0.0"
   :resource-paths ["config", "resources"]
-  :java-agents [[org.mortbay.jetty.alpn/jetty-alpn-agent "2.0.3"]]
-  :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "hp.server/run-dev"]}}
+  :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "hp.server/run-dev"]}
+                   :jvm-opts ["-Dio.pedestal.dev-mode=true"]}
              :uberjar {:aot [hp.server]}}
   :main ^{:skip-aot true} hp.server)
